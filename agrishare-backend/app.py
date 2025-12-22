@@ -4,6 +4,9 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 from auth import auth_bp
+from seeds import seeds_bp
+from animals import animals_bp
+from prices import prices_bp
 
 load_dotenv()
 
@@ -23,6 +26,14 @@ try:
 
 except Exception as e:
     print("❌ MongoDB error:", e)
+
+# ===== REGISTER AUTH ROUTES =====
+app.register_blueprint(auth_bp)   # IMPORTANT
+app.register_blueprint(seeds_bp)
+app.register_blueprint(animals_bp)
+app.register_blueprint(prices_bp)
+
+
 
 # ===== CREATE COLLECTIONS (if they don't exist) =====
 def init_collections():
